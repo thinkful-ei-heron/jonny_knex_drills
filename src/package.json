@@ -1,0 +1,16 @@
+{
+  "name": "articles-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "blogful.js",
+  "scripts": {
+    "start": "node blogful.js"
+  },
+  "author": "JonnyDeates",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "knex": "^0.20.1",
+    "pg": "^7.12.1"
+  }
+}

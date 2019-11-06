@@ -1,0 +1,8 @@
+
+node_modules
+src/node_modules
+.env
+package-lock
+src/.env
+src/package-lock
+.idea

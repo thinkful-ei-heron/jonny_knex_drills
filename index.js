@@ -1,6 +1,6 @@
 require('dotenv').config();
 const knex = require('knex');
-
+const ShoppingListService = require('./shoppinglistservice');
 const knexInstance = knex({
     client: 'pg',
     connection: process.env.DB_URL,
@@ -43,7 +43,29 @@ function totalCostofCategories() {
         .sum({total: 'price'})
         .then(result => console.log(result))
 }
-//searchItembyName('Fish tricks');
+//
 //paginateProducts(2);
 //itemsAfterDate(2);
-totalCostofCategories();
+ShoppingListService.getAllObjs(knexInstance)
+    .then(objs => console.log(objs))
+    .then(() =>
+        ShoppingListService.insertProduct(knexInstance, {
+            name: 'Fish Memes',
+            price: 420.69,
+            checked: false,
+            category: 'Main',
+            date_added: new Date(),
+        })
+    )
+    .then(newProduct => {
+        return ShoppingListService.updateProduct(
+            knexInstance,
+            newProduct.id,
+            { name: 'Fish Lemes' }
+        ).then(() => ShoppingListService.getById(knexInstance, newProduct.id)).then(()=>searchItembyName('Fish Lemes'))
+    });
+    // .then(product => {
+    //     return ShoppingListService.deleteProduct(knexInstance, product.id)
+    // });
+
+//totalCostofCategories();
